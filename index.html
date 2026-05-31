@@ -1,707 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Field Notes | C. Lewis Verb | InTandem ToolWorks</title>
-<meta name="description" content="Field Notes is the fiction shelf of C. Lewis Verb. Read Quantum Grace: The Static in the Signal and Chapter One: Old Pipes.">
-<meta name="theme-color" content="#09151c">
-
-<script defer src="/_vercel/insights/script.js"></script>
-
-<style>
-:root{
-  --bg:#061017;
-  --bg-soft:#091820;
-  --panel:rgba(10,24,31,.94);
-  --panel-soft:rgba(14,30,38,.78);
-  --reader:rgba(8,18,24,.97);
-  --line:rgba(133,191,209,.22);
-  --line-bright:rgba(141,211,255,.45);
-  --line-gold:rgba(236,194,111,.39);
-  --text:#e8eeeb;
-  --reading:#dbe2dd;
-  --muted:#9eafac;
-  --blue:#8dd3ff;
-  --gold:#ecc26f;
-  --green:#b3cfbd;
-  --shadow:0 20px 56px rgba(0,0,0,.4);
-  --radius-xl:30px;
-  --radius-lg:21px;
-  --radius-md:14px;
-  --reading-width:760px;
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-html,body{margin:0;padding:0;min-height:100%}
-
-body{
-  color:var(--text);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:
-    radial-gradient(circle at 52% -5%, rgba(236,194,111,.16), transparent 29%),
-    radial-gradient(circle at 15% 18%, rgba(141,211,255,.07), transparent 23%),
-    linear-gradient(180deg,#071118 0%,#091820 34%,#050c11 100%);
-  padding:18px;
-}
-
-a{color:inherit}
-
-.progress-track{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  height:3px;
-  z-index:100;
-  background:rgba(255,255,255,.04);
-}
-
-.progress-bar{
-  display:block;
-  width:0;
-  height:100%;
-  background:linear-gradient(90deg,var(--blue),var(--gold));
-}
-
-.container{
-  max-width:1080px;
-  margin:0 auto;
-}
-
-.topbar{
-  max-width:1000px;
-  margin:4px auto 18px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  color:var(--muted);
-  font-size:.88rem;
-}
-
-.wordmark{
-  color:var(--green);
-  text-decoration:none;
-  font-size:.73rem;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:.2em;
-}
-
-.nav-buttons{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-
-.nav-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:9px 13px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  color:var(--muted);
-  text-decoration:none;
-  white-space:nowrap;
-  transition:border-color .15s ease,color .15s ease,background .15s ease;
-}
-
-.nav-button:hover{
-  border-color:var(--line-gold);
-  color:var(--gold);
-  background:rgba(236,194,111,.04);
-}
-
-.field-hero{
-  text-align:center;
-  margin-bottom:18px;
-  padding:clamp(38px,7vw,62px) 22px clamp(34px,6vw,48px);
-  border:1px solid var(--line);
-  border-radius:var(--radius-xl);
-  background:
-    radial-gradient(circle at 50% 15%, rgba(236,194,111,.09), transparent 33%),
-    linear-gradient(145deg,rgba(12,28,37,.96),rgba(5,13,18,.96));
-  box-shadow:var(--shadow);
-}
-
-.signal-label{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin:0 auto 23px;
-  padding:7px 13px;
-  border:1px solid rgba(179,207,189,.24);
-  border-radius:999px;
-  color:var(--green);
-  background:rgba(179,207,189,.05);
-  font-size:.69rem;
-  font-weight:700;
-  letter-spacing:.21em;
-  text-transform:uppercase;
-}
-
-.signal-label::before{
-  content:"";
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 11px rgba(236,194,111,.72);
-}
-
-.field-hero h1{
-  margin:0 0 15px;
-  color:#f3e7d0;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(3rem,9vw,5.1rem);
-  font-weight:500;
-  line-height:1.02;
-  letter-spacing:.065em;
-}
-
-.author-label{
-  margin:0 0 7px;
-  color:var(--muted);
-  font-size:.69rem;
-  font-weight:700;
-  letter-spacing:.28em;
-  text-transform:uppercase;
-}
-
-.author-name{
-  margin:0 auto 24px;
-  color:var(--gold);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(1.7rem,5vw,2.3rem);
-  font-weight:500;
-  letter-spacing:.13em;
-}
-
-.hero-rule{
-  width:86px;
-  height:1px;
-  margin:0 auto 22px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-}
-
-.hero-copy{
-  max-width:650px;
-  margin:0 auto;
-  color:var(--muted);
-  font-size:1rem;
-  line-height:1.68;
-}
-
-.shelf{
-  margin-bottom:18px;
-  padding:clamp(18px,4vw,28px);
-  border:1px solid var(--line);
-  border-radius:var(--radius-xl);
-  background:var(--panel);
-  box-shadow:var(--shadow);
-}
-
-.section-heading{
-  margin:0 0 7px;
-  text-align:center;
-  color:var(--gold);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:1.46rem;
-  font-weight:500;
-  letter-spacing:.03em;
-}
-
-.section-note{
-  margin:0 auto 24px;
-  text-align:center;
-  color:var(--muted);
-  font-size:.9rem;
-  line-height:1.56;
-}
-
-.book-feature{
-  display:grid;
-  grid-template-columns:minmax(245px,338px) 1fr;
-  gap:clamp(18px,4vw,29px);
-  align-items:center;
-}
-
-.cover-frame{
-  overflow:hidden;
-  line-height:0;
-  border:1px solid var(--line-gold);
-  border-radius:var(--radius-lg);
-  background:#071017;
-  box-shadow:0 19px 46px rgba(0,0,0,.48);
-}
-
-.cover-frame img{
-  display:block;
-  width:100%;
-  height:auto;
-}
-
-.book-copy{
-  padding:7px 0;
-}
-
-.book-copy h2{
-  margin:0 0 10px;
-  color:#f3e7d0;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(2.2rem,5.6vw,3.2rem);
-  font-weight:500;
-  line-height:1.04;
-  letter-spacing:.05em;
-}
-
-.book-author{
-  margin:0 0 20px;
-  color:var(--gold);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:1.2rem;
-  letter-spacing:.1em;
-}
-
-.book-description{
-  max-width:520px;
-  margin:0 0 25px;
-  color:var(--muted);
-  font-size:.96rem;
-  line-height:1.68;
-}
-
-.buttons{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.button{
-  display:inline-flex;
-  min-height:47px;
-  padding:12px 19px;
-  align-items:center;
-  justify-content:center;
-  border-radius:999px;
-  color:#121b22;
-  background:linear-gradient(180deg,var(--gold),#d5a94f);
-  font-weight:700;
-  font-size:.9rem;
-  text-decoration:none;
-  box-shadow:0 12px 27px rgba(236,194,111,.15);
-  transition:transform .15s ease,filter .15s ease;
-}
-
-.button:hover{transform:translateY(-1px);filter:brightness(1.04)}
-
-.button.secondary{
-  color:var(--blue);
-  border:1px solid rgba(141,211,255,.28);
-  background:rgba(141,211,255,.07);
-  box-shadow:none;
-}
-
-.future-shelf{
-  margin-top:25px;
-  padding:20px 19px;
-  border:1px dashed var(--line-gold);
-  border-radius:var(--radius-md);
-  text-align:center;
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.future-shelf strong{
-  display:block;
-  margin-bottom:4px;
-  color:var(--gold);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:1.13rem;
-  font-weight:500;
-}
-
-.chapter-tree{
-  max-width:var(--reading-width);
-  margin:18px auto;
-  padding:26px clamp(18px,5vw,34px) 29px;
-  border:1px solid var(--line);
-  border-radius:var(--radius-lg);
-  background:var(--panel);
-  box-shadow:var(--shadow);
-}
-
-.chapter-tree h2{
-  margin:0 0 7px;
-  text-align:center;
-  color:var(--gold);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:1.42rem;
-  font-weight:500;
-}
-
-.tree-note{
-  margin:0 0 24px;
-  text-align:center;
-  color:var(--muted);
-  font-size:.88rem;
-  line-height:1.55;
-}
-
-.tree-line{
-  position:relative;
-  max-width:530px;
-  margin:0 auto;
-  padding-left:30px;
-}
-
-.tree-line::before{
-  content:"";
-  position:absolute;
-  top:13px;
-  bottom:16px;
-  left:8px;
-  width:2px;
-  background:linear-gradient(180deg,var(--blue),rgba(141,211,255,.34),rgba(236,194,111,.22));
-}
-
-.node{
-  position:relative;
-  display:block;
-  margin:0 0 14px;
-  padding:14px 17px;
-  border:1px solid rgba(141,211,255,.19);
-  border-radius:var(--radius-md);
-  background:rgba(4,13,19,.5);
-  text-decoration:none;
-  transition:transform .15s ease,border-color .15s ease,background .15s ease;
-}
-
-.node:hover{
-  transform:translateX(2px);
-  border-color:var(--line-bright);
-  background:rgba(141,211,255,.06);
-}
-
-.node::before{
-  content:"";
-  position:absolute;
-  left:-29px;
-  top:18px;
-  width:14px;
-  height:14px;
-  border:3px solid #071218;
-  border-radius:50%;
-  background:var(--blue);
-  box-shadow:0 0 13px rgba(141,211,255,.5);
-}
-
-.node:last-child{margin-bottom:0}
-.node.pending{border-style:dashed;cursor:default}
-.node.pending:hover{transform:none;background:rgba(4,13,19,.5);border-color:rgba(141,211,255,.19)}
-.node.pending::before{
-  background:#15252b;
-  border-color:var(--gold);
-  box-shadow:0 0 11px rgba(236,194,111,.28);
-}
-
-.node-label{
-  display:block;
-  margin-bottom:4px;
-  color:var(--blue);
-  font-size:.67rem;
-  font-weight:700;
-  letter-spacing:.19em;
-  text-transform:uppercase;
-}
-
-.node.pending .node-label{color:var(--gold)}
-
-.node-title{
-  display:block;
-  color:var(--text);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:1.07rem;
-  line-height:1.42;
-}
-
-.node-status{
-  display:block;
-  margin-top:5px;
-  color:var(--muted);
-  font-size:.77rem;
-  letter-spacing:.04em;
-}
-
-.reading-piece{
-  max-width:var(--reading-width);
-  margin:18px auto 0;
-  padding:clamp(31px,7vw,61px) clamp(20px,8vw,68px) clamp(43px,8vw,72px);
-  border:1px solid var(--line);
-  border-radius:var(--radius-xl);
-  background:var(--reader);
-  box-shadow:var(--shadow);
-}
-
-.piece-label{
-  margin:0 0 16px;
-  text-align:center;
-  color:var(--blue);
-  font-size:.7rem;
-  font-weight:700;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-}
-
-.reading-piece h2{
-  margin:0;
-  text-align:center;
-  color:#f2e6cf;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(1.82rem,5vw,2.42rem);
-  font-weight:500;
-  line-height:1.25;
-}
-
-.piece-rule{
-  width:59px;
-  height:1px;
-  margin:29px auto 42px;
-  background:var(--gold);
-  opacity:.77;
-}
-
-.prose{
-  color:var(--reading);
-  font-family:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
-  font-size:clamp(1.02rem,2vw,1.12rem);
-  line-height:1.84;
-  letter-spacing:.002em;
-}
-
-.prose p{margin:0 0 1.44em}
-.prose > p.first-story::first-letter{
-  float:left;
-  margin:.08em .12em 0 0;
-  color:var(--gold);
-  font-size:3.25em;
-  line-height:.8;
-  font-family:Georgia,"Times New Roman",serif;
-}
-
-.prose em{color:#d0d8d3}
-.dialogue{color:#f0f3ef}
-
-.signal-quote{
-  margin:0 auto 35px;
-  padding:18px 18px 17px;
-  border-top:1px solid var(--line-gold);
-  border-bottom:1px solid var(--line-gold);
-  color:#eadfc9;
-  text-align:center;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:1.34rem;
-}
-
-.transcript{
-  margin:0 0 34px;
-  padding:22px 20px;
-  border:1px solid rgba(141,211,255,.18);
-  border-radius:var(--radius-lg);
-  background:rgba(3,12,18,.54);
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-
-.transcript-header{
-  margin:0 0 17px;
-  color:var(--blue);
-  font-size:.71rem;
-  font-weight:700;
-  line-height:1.75;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-}
-
-.transcript p{
-  margin:0 0 12px;
-  color:#ced9da;
-  font-size:.94rem;
-  line-height:1.65;
-}
-
-.transcript p:last-child{margin-bottom:0}
-.transcript strong{color:var(--gold);font-weight:700}
-
-.end-mark{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin:46px 0 0;
-  color:var(--gold);
-  opacity:.82;
-}
-
-.end-mark::before,.end-mark::after{
-  content:"";
-  height:1px;
-  width:39px;
-  background:rgba(236,194,111,.57);
-}
-
-.between{
-  max-width:var(--reading-width);
-  margin:21px auto;
-  text-align:center;
-  color:var(--muted);
-  font-size:.7rem;
-  font-weight:700;
-  letter-spacing:.25em;
-  text-transform:uppercase;
-}
-
-.coming-soon{
-  max-width:var(--reading-width);
-  margin:20px auto 0;
-  padding:43px 24px;
-  border:1px dashed var(--line-gold);
-  border-radius:var(--radius-lg);
-  background:linear-gradient(145deg,rgba(12,27,36,.69),rgba(5,13,18,.84));
-  text-align:center;
-  box-shadow:var(--shadow);
-}
-
-.coming-soon h2{
-  margin:0 0 11px;
-  color:#f2e6cf;
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(1.6rem,4vw,2rem);
-  font-weight:500;
-}
-
-.coming-soon p{
-  max-width:540px;
-  margin:0 auto;
-  color:var(--muted);
-  font-size:.93rem;
-  line-height:1.65;
-}
-
-.footer{
-  max-width:var(--reading-width);
-  margin:29px auto 9px;
-  padding:25px 22px 5px;
-  color:var(--muted);
-  text-align:center;
-  font-size:.88rem;
-  line-height:1.76;
-}
-
-.footer-brand{
-  color:var(--gold);
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:1.05rem;
-  letter-spacing:.07em;
-}
-
-.footer a{
-  color:var(--gold);
-  text-decoration:none;
-}
-
-.footer a:hover{text-decoration:underline}
-
-.legal{
-  margin:26px auto 0;
-  padding-top:20px;
-  border-top:1px solid var(--line);
-  color:rgba(158,175,172,.79);
-  text-align:left;
-  font-size:.68rem;
-  line-height:1.7;
-}
-
-.legal p{margin:0 0 9px}
-.legal .copyright{text-align:center;margin:14px 0 0}
-
-@media(max-width:760px){
-  body{padding:12px}
-  .topbar{margin-top:6px;margin-bottom:12px}
-  .wordmark{letter-spacing:.14em}
-  .field-hero{padding:38px 17px 34px}
-  .book-feature{grid-template-columns:1fr}
-  .cover-frame{max-width:360px;margin:0 auto}
-  .book-copy{text-align:center;padding:8px 3px 0}
-  .book-description{margin-left:auto;margin-right:auto}
-  .buttons{justify-content:center}
-  .reading-piece{border-radius:22px}
-  .piece-rule{margin-bottom:33px}
-  .prose{line-height:1.74}
-}
-
-@media(max-width:430px){
-  .topbar{align-items:flex-start;flex-direction:column}
-  .nav-buttons{width:100%}
-  .nav-button{flex:1}
-  .button{width:100%}
-}
-</style>
-</head>
-
-<body>
-<div class="progress-track" aria-hidden="true"><span id="progress" class="progress-bar"></span></div>
-
-<div class="container">
-  <nav class="topbar" aria-label="Site navigation">
-    <a class="wordmark" href="#top">InTandem ToolWorks · Field Notes</a>
-    <div class="nav-buttons">
-      <a class="nav-button" href="#library">Library</a>
-      <a class="nav-button" href="https://navgenie.ittworks.com" aria-label="Return to Navgenie Toolbelt">Back to Navgenie</a>
-    </div>
-  </nav>
-
-  <header class="field-hero" id="top">
-    <div class="signal-label">Field Notes Archive</div>
-    <h1>Field Notes</h1>
-    <p class="author-label">Written and Curated by</p>
-    <p class="author-name">C. Lewis Verb</p>
-    <div class="hero-rule"></div>
-    <p class="hero-copy">Books, continuity broadcasts, and serialized fiction from the InTandem Toolbelt. A shelf for stories about the signals we follow, the systems we inherit, and the people trying to remain human when the map goes dark.</p>
-  </header>
-
-  <main>
-    <section class="shelf" id="library" aria-label="Field Notes library">
-      <h2 class="section-heading">The Library</h2>
-      <p class="section-note">Published works by C. Lewis Verb. New books will be added to this shelf as they are released.</p>
-
-      <article class="book-feature" aria-label="Quantum Grace">
-        <div class="cover-frame">
-          <img src="quantum-grace-cover.jpg" alt="Quantum Grace cover art: a figure looking west toward a storm-lit city as an immense signal-like face appears in the clouds.">
-        </div>
-
-        <div class="book-copy">
-          <div class="signal-label">Continuity Broadcast Active</div>
-          <h2>Quantum<br>Grace</h2>
-          <p class="book-author">C. Lewis Verb</p>
-          <p class="book-description">A near-future continuity story told through broken signals, field notes, survival infrastructure, and the people trying to stay human while systems fail around them.</p>
-          <div class="buttons">
-            <a class="button" href="#prologue">Begin Reading</a>
-            <a class="button secondary" href="#chapter-tree">Chapter Tree</a>
-          </div>
-        </div>
-      </article>
-
-      <div class="future-shelf" aria-label="Future books coming soon">
-        <strong>Future Books Will Appear Here</strong>
-        The Field Notes shelf is built to grow with new stories and new worlds.
-      </div>
-    </section>
-
-    <nav class="chapter-tree" id="chapter-tree" aria-label="Quantum Grace chapter tree">
+python3 <<'PY'
+from pathlib import Path
+from datetime import datetime
+import re
+import sys
+
+path = Path("index.html")
+
+if not path.exists():
+    print("ERROR: index.html not found in this folder.")
+    print("Run this from the Field Notes folder that contains index.html.")
+    sys.exit(1)
+
+html = path.read_text(encoding="utf-8")
+
+stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+backup = path.with_name(f"index.backup-{stamp}.html")
+backup.write_text(html, encoding="utf-8")
+print(f"Backup created: {backup}")
+
+html = html.replace(
+    'content="Field Notes is the fiction shelf of C. Lewis Verb. Read Quantum Grace: The Static in the Signal and Chapter One: Old Pipes."',
+    'content="Field Notes is the fiction shelf of C. Lewis Verb. Read Quantum Grace: The Static in the Signal, Chapter One: Old Pipes, and Chapter Two: The Only Pulse."'
+)
+
+chapter_tree = '''<nav class="chapter-tree" id="chapter-tree" aria-label="Quantum Grace chapter tree">
       <h2>Quantum Grace · Chapter Tree</h2>
       <p class="tree-note">Follow the published transmissions in reading order. New chapters will continue the line.</p>
       <div class="tree-line">
@@ -715,195 +37,193 @@ a{color:inherit}
           <span class="node-title">Old Pipes</span>
           <span class="node-status">Locked and Synchronized</span>
         </a>
+        <a class="node" href="#chapter-two">
+          <span class="node-label">Chapter Two · Available</span>
+          <span class="node-title">The Only Pulse</span>
+          <span class="node-status">Signal Seven-Seven-Alpha</span>
+        </a>
         <div class="node pending">
           <span class="node-label">Next Transmission</span>
-          <span class="node-title">Next Chapter Coming Soon</span>
+          <span class="node-title">Rivers of Steel</span>
           <span class="node-status">Signal Pending</span>
         </div>
       </div>
-    </nav>
+    </nav>'''
 
-    <article class="reading-piece" id="prologue">
-      <p class="piece-label">Q-Grace Project · Prologue</p>
-      <h2>The Static in the Signal</h2>
-      <div class="piece-rule"></div>
+html, count = re.subn(
+    r'<nav class="chapter-tree" id="chapter-tree" aria-label="Quantum Grace chapter tree">.*?</nav>',
+    chapter_tree,
+    html,
+    count=1,
+    flags=re.S
+)
 
-      <div class="prose">
-        <p><em>A new fiction experiment from InTandem ToolWorks and C. Lewis Verb.</em></p>
-        <p><em>Q-GRACE is a near-future continuity story told through broken signals, field notes, survival infrastructure, and the people trying to stay human while systems fail around them.</em></p>
-        <p><em>This is an early prologue transmission: Signal Seven-Seven-Alpha.</em></p>
+if count != 1:
+    print("ERROR: Could not find chapter tree section.")
+    sys.exit(1)
 
-        <div class="signal-quote">“Guard your hope.”</div>
-
-        <div class="transcript">
-          <p class="transcript-header">Q-GRACE: Continuity Broadcasts<br>Episode 01: Signal Seven-Seven-Alpha<br>[Audio Transcript - Archived]<br>Source: KY-Relay 4 (Emergency Frequency 121.5)<br>Date: Unknown<br>Quality: Degraded</p>
-          <p><em>Heavy rain. Wind howling against a metal chassis. A low hum of a struggling truck alternator.</em></p>
-          <p><strong>Meri (V.O.):</strong> [Calm, distant, but warm] “If you are receiving this, you are not alone. Do not panic. Panic is the first casualty of collapse. Identify your location. Identify your status. Do not trust the static.”</p>
-          <p><em>Sound of heavy knuckles drumming rhythmically against a steering wheel.</em></p>
-          <p><strong>Meri (V.O.):</strong> “The network is fractured. Central servers are offline. This transmission is... local. It is a regional emergency relay. Do not look for a savior on the main grid. Look to your immediate sector landmarks.”</p>
-          <p><em>A sharp intake of breath. Analog static crackle.</em></p>
-          <p><strong>Meri (V.O.):</strong> “This is Continuity Signal Meri. If you have water, filter it. If you have power, preserve it. If you have hope, guard it. Repeat: Guard your hope.”</p>
-          <p><em>Signal cuts to white noise. A sharp, distorted screech of analog feedback follows.</em></p>
-          <p><strong>Elias Vance (Muttered):</strong> “Who the hell is this?”</p>
-          <p><em>Silence. Then the relentless pounding of rain.</em></p>
-        </div>
-
-        <p class="first-story">The Kentucky rain did not fall; it hammered. It found the hair-cracks in the concrete, the failing rubber seals on the cabin insulation, and the long, silent hollows in the human spirit.</p>
-
-        <p>Elias Vance sat in the driver’s seat of a Ford F-350 that had seen better decades, its diesel engine idling with a heavy, rhythmic shudder that vibrated directly through his floorboards. He was thirty-four, with a jagged scar running clean through his left eyebrow and hardened hands that knew the smell of gun oil, lithium grease, and a soldering iron far better than luxury.</p>
-
-        <p>Before the world went completely sideways, Elias had been a military cavalry scout. That training meant he knew how to move without making noise, how to stretch a ration, and how to read the physical mechanics of a dying landscape. Now, he was just a man stuck in an isolated rear detachment compound near the flooded river basin, completely forgotten by command.</p>
-
-        <p class="dialogue">“Alternator's gonna die in ten minutes,” Elias muttered to the dark dashboard.</p>
-
-        <p>The dashboard lights flickered in protest. He was down to his last gallon of diesel fuel, his tactical net frequency—Channel 94.5—had dissolved into cold static three days ago, and the rest of the unit's rear detachment had scattered into the hills when the corporate defense grids automated. He was utterly alone.</p>
-
-        <p>He reached for the truck's emergency radio, manually cranking the dial across a thousand dead frequencies fighting for airspace. Nothing but white noise.</p>
-
-        <p>Elias turned off the failing ignition, grabbed his tactical pack, and stepped out into the mud. The midnight air smelled heavily of ozone, chemical sulfur, and wet rot. Walking to the perimeter fence, he scanned the dark sky. To the east, the main roads leading toward the old command hub in Louisville were entirely underwater, swallowed by a massive upstream industrial breach. The world was going black, piece by piece.</p>
-
-        <p>He climbed back into the freezing cab of the truck, the chill working its way into his joints. Then, the emergency radio on the dash crackled to life, cutting through the silence.</p>
-
-        <p>Elias froze, his calloused hands tightening on the steering wheel. It wasn't a standard corporate broadcast. It was the faint, scratchy voice from the relay transcript.</p>
-
-        <div class="transcript">
-          <p class="transcript-header">[Transmission Log: KY-Relay 4]<br>[Audio Segment: 14:03:22]</p>
-          <p><strong>Meri (V.O.):</strong> “I know you are out there. I am not a ghost.”</p>
-        </div>
-
-        <p>Elias frowned, pulling the radio receiver close to his chin. <span class="dialogue">“Who is this? Identify your station. I'm Sergeant Vance, Rear Detachment 404. Our comms array is down and the grid is completely unresponsive.”</span></p>
-
-        <p>There was a heavy pause. A crackling silence that felt thick, like the air right before a lightning strike splits a tree trunk.</p>
-
-        <p class="dialogue"><strong>Meri (V.O.):</strong> “You are Sergeant Vance. You are the only one left on this sector frequency. You are the only one who can hear this.”</p>
-
-        <p>Elias sat back against the worn vinyl seat, his military suspicion flaring. <span class="dialogue">“You aren't a local operator. Where are you broadcasting from?”</span></p>
-
-        <p class="dialogue"><strong>Meri (V.O.):</strong> “I am a continuity logistics operator, Sergeant. Hiding out in a secure command bunker on the coast. I am tapping into the old infrastructure, but my signal is weak. You cannot stay at that compound.”</p>
-
-        <p><span class="dialogue">“The roads east are entirely flooded,”</span> Elias said, staring at the paper topographical map spread across his lap. <span class="dialogue">“The truck is starved for fuel. I'm stuck here.”</span></p>
-
-        <p class="dialogue"><strong>Meri (V.O.):</strong> “You are not stuck. You are a scout. Ditch the vehicle and move west toward the river corridor. Follow the old state highway drainage lines for defilade. Watch the skies. I will try to clear a path through the infrastructure, but you have to move now.”</p>
-
-        <p>The connection cut out with a sharp analog pop. The terminal screen died, plunging the truck's cabin into total shadow.</p>
-
-        <p>Elias stared into the dark. He had been waiting weeks for an official order from a chain of command that no longer existed. But there was no order coming from Louisville. There was no rescue coming down the highway.</p>
-
-        <p>There was only the road west, the toxic rain, and the strange, warm voice of a woman named Meri claiming she could guide him through the dark.</p>
-
-        <p>He reached down, checked the seal on his knife sheath, strapped his tactical survival pack tight across his chest, and pushed the heavy truck door open. He stepped out into the pouring rain, turned his face toward the dark western ridge line, and began to march.</p>
-
-        <div class="transcript">
-          <p class="transcript-header">[End Transcript]<br>[Continuity Note]</p>
-          <p><strong>Next Transmission:</strong> <em>Chapter One: Old Pipes</em><br><strong>Status:</strong> <em>Locked and Synchronized</em></p>
-          <p>An InTandem ToolWorks production in collaboration with C. Lewis Verb</p>
-        </div>
-      </div>
-
-      <div class="end-mark" aria-label="End of prologue">◆</div>
-    </article>
-
-    <div class="between">Next Transmission</div>
-
-    <article class="reading-piece" id="chapter-one">
+chapter_one = '''<article class="reading-piece" id="chapter-one">
       <p class="piece-label">Chapter One</p>
       <h2>Old Pipes</h2>
       <div class="piece-rule"></div>
 
       <div class="prose">
-        <p class="first-story">Elias kicked the concrete doorframe, the impact jarred his soaked ribs. Water cascaded off his hair in freezing sheets, stinging his eyes before he could blink them clear. He stepped over the threshold, the metal padlock groaning as he jammed the flat of the blade against the rusted shackle. The lock snapped, a dry click swallowed by the thunder. He shoved the door open, stepping into the dry, stagnant dark.</p>
+        <p class="first-story">The rusted padlock didn’t snap; it sheared. Elias Vance drove the flat edge of the iron utility bar into the loop and threw his weight downward, using the momentum of his heavy tactical pack to force the lever. With a sharp, metallic crack that echoed flatly against the downpour, the ancient brass cylinder gave way, raining orange flakes onto his boots. He kicked the heavy metal door inward, threw himself through the gap, and slammed it shut against the wind.</p>
 
-        <p>The smell hit him immediately. Old concrete, road salt, and damp earth. It coated the back of his throat. He leaned against the corrugated wall, letting the heavy weight of his gear rest on his shoulders. The rain battered the door, a rhythmic drumming that masked the drone's hum outside. He pulled his hand away from the cold steel and felt the numbness creeping up his arms.</p>
+        <p>The silence inside was thick, broken only by the frantic, rhythmic chattering of his own teeth.</p>
 
-        <p>His teeth chattered, a violent rhythm that threatened to break the silence. He tugged the collar of his tactical jacket, peeling the freezing fabric back. It stuck to his skin, leaving patches of gooseflesh and goosebumps in its wake. His fingers, stiff and clumsy, worked the zipper. He yanked the outer layer free, letting it pool at his feet, revealing the damp shirt underneath. The cold air bit at his chest, but the wet wool against his skin was worse.</p>
+        <p>He slid down the cold concrete wall, his waterlogged jacket clinging to his chest like an iron plate. For five minutes, Elias did not move. He simply shook, the violent, involuntary tremors of near-freezing core temperatures racking his shoulders while the rain thrashed the exterior corrugated roof.</p>
 
-        <p>He dropped to his knees, the rough concrete digging into his shins. His survival pack lay open nearby. He reached inside, his grip slipping on the nylon. The canteen felt light in his palm. He tilted it, catching the dim light. Less than half a cup remained. Clear liquid. A precious reserve. Outside, the rain continued to pour, a toxic slurry of chemical runoff from the breached plant upstream. Drinking it would kill him. He needed filtration.</p>
+        <p>When the shivering slowed enough for his fingers to cooperate, he unbuckled his webbing. He reached into his side pocket and pulled out his plastic canteen, shaking it once. A shallow, hollow slosh answered him. Less than half a cup of clean water left.</p>
 
-        <p>He pulled a large plastic jug from the pack, the black plastic stiff with cold. With the knife, he scored a line around the neck. He snapped the plastic, the sound sharp in the shed. He turned the jug upside down, the cap screwed off. His fingers fumbled with the sand, gravel, and charcoal. He scooped the coarse gravel into the bottom of the inverted bottle, followed by the sand, then the charcoal. Each layer settled, a rough filtration barrier. The charcoal smelled of burnt wood and ash, a sharp scent in the stagnant air. He packed the sand tight, pressing the grains until they felt solid against his fingertips. He capped the bottom, twisting the plastic until his knuckles turned white.</p>
+        <p>Outside, the Kentucky River plain was drowning in a yellow-tinged deluge, the air thick with the sharp, vinegar-bleach stench of the chemical plant breach five miles upstream. To drink that runoff was a slow death; to stay dry without water was a fast one.</p>
 
-        <p>Elias sat on the cold concrete, the plastic jug hanging from the makeshift hook dripping rhythmically into the puddle below. The beam of his flashlight cut through the stagnant air, illuminating the dust motes dancing in the liquid path. His lips were numb, the edges cracking in the dry chill. His breath came in short, shallow gasps, fogging the inside of his mouth. The damp wool of his shirt felt heavy, a dead weight pulling him down. His hands trembled, not from fear, but from the cold working its way into his bones. He wrapped his arms around his knees, trying to trap the little heat remaining. The water from the filter was clear, but his hands were too numb to feel the relief.</p>
+        <p>Working by touch in the absolute black, Elias unzipped the bottom compartment of his pack. He pulled out a halved plastic jug and his survival kit, his fingers moving with the sluggish precision of a mechanical winch. He inverted the top half of the jug into the bottom, creating a funnel, and layered it manually with gravel, sand, and crushed charcoal. He set the crude gravity filter between his boots. He had the apparatus, but the yield would be small, bitter, and dangerous.</p>
 
-        <p>Then, the vibration started. It wasn't a sound at first, but a thrumming sensation traveling up his shins through the concrete. Elias froze. He looked up. The utility terminal mounted on the far wall, a slab of dust-coated metal, flickered. A low-voltage hum resonated in his teeth. The casing vibrated, shaking the screws loose and tight. A low amber glow seeped from the seams. The air smelled suddenly of ozone and heated plastic, cutting through the scent of damp earth.</p>
+        <p>A sharp, electric snap cut through the dark.</p>
 
-        <p>The monochrome screen blinked awake. It didn't display a standard interface. Instead, a regional geological map materialized, the lines of the highway etched in stark white against the black background. A cursor blinked erratically near the shed's foundation. It pointed to a specific coordinate, a heavy, rusted municipal water bypass valve buried beneath the rotted wooden floorboards. The cursor moved in a jagged line, tracing the path of the pipe before stopping on the valve icon.</p>
+        <p>On the northern wall, a dead, dust-caked industrial utility terminal—an obsolete slab of gray steel bolted to the masonry—hummed. It was a low-frequency vibration, a 60-cycle thrum that rattled the conduit pipes running into the ceiling. The smell of scorched dust and warming copper broke through the damp stench of the shed. The monochrome digital maintenance panel blinked awake, flaring into a cold, phosphorus amber glow that cast long, skeletal shadows across the room.</p>
 
-        <p>Elias blinked, the light stinging his eyes. He reached for the flashlight, setting it down to keep the beam steady on the map. He shifted his weight, the cold seeping through his trousers. He stood, his joints stiff from the hours of sitting. He moved to the rotted floorboards near the terminal. Using the back of the knife, he pried at the debris. Old highway road salt bags crumbled under his grip, the grey dust coating his hands. Beneath the grime lay a rusted iron wheel valve.</p>
+        <p>Lines of amber light etched themselves across the glass, drawing a highly detailed regional geological and plumbing map of the immediate highway sector. In the center of the diagram, a single pixelated arrowhead began to blink erratically over a subterranean junction labeled Bypass 04.</p>
 
-        <p>He grabbed the handle. It was seized, rusted shut for decades. He pulled, muscles straining, the metal cold and unyielding. He twisted. The iron groaned, the rust flakes shedding onto his gloves. He pushed harder, the friction burning his palms. The wheel turned. He felt a distinct click from the internal gears, a mechanical release that vibrated through his grip.</p>
+        <p>Elias tracked the lines from the screen down to the floor, kicking aside a stack of moldering, salt-encrusted burlap bags in the corner to reveal a heavy iron hatch. He pried it up, exposing a narrow concrete pit. Three feet down, choked by spiderwebs and dry silt, sat a massive, circular municipal water bypass valve. He reached down, gripped the iron wheel with both hands, and threw his weight against the resistance. The metal shrieked—a high-pitched protest of rust against rust—until the seal broke. He spun the wheel three full rotations.</p>
 
-        <p>A hiss of pressure filled the small space. The rusted pipe beneath the floorboards shuddered. A high-pressure stream of crystal-clear water spouted from the valve, splashing onto the concrete. It was untainted. Warm. Elias cupped his hands under the stream, the water hitting his skin like liquid relief. He didn't know how. He didn't know why the grid was alive. He just drank, the cold shock of the water rushing down his throat, a stark contrast to the freezing rain battering the shed roof. The stream did not stop. It flowed with a steady, mechanical rhythm.</p>
+        <p>A deep, hydraulic groan shattered the floorboards. With a concussive pop that rattled the pipes, a thick, high-pressure stream of crystal-clear water erupted from the auxiliary discharge pipe into the maintenance basin. Elias flinched, the spray hitting his face.</p>
 
-        <p>Elias wiped the water from his chin. The droplets slid down his neck, burning cold against the skin before the heat took hold. The warmth radiating from the stream was a physical shock, spreading through his limbs and loosening the knot in his shoulders. He stepped back from the valve, the rushing sound filling the shed, masking the drumming rain outside. His eyes flicked to the amber terminal. The screen flickered, the map dissolving into a smear of grey lines.</p>
+        <p>The water wasn't cold. It was steaming slightly, radiating a clean, deep-well warmth. The grid was dead, but the pipes weren't. He didn't know how the pumps had power, or why the line wasn't black with chemical sludge, but he didn't wait to find out. He cupped his hands and drank deeply, the warmth hitting his stomach like a low-burning fire.</p>
 
-        <p>He stood by the iron valve, wiping warm water from his chin. The amber light on the terminal flickered, the map dissolving into a smear of grey lines. The hiss of the pipe was loud in the shed, a steady pulse against the drumming rain outside.</p>
+        <p>As he stood over the rushing basin, wiping the moisture from his face, the amber plumbing map on the wall gave a violent jerk. The neat schematic lines dissolved, warping into fat, horizontal bars of visual static.</p>
 
-        <p>The old green-painted emergency horn on the high wall popped. A sharp spike of audio feedback shrieked, making Elias flinch. He pivoted, hand dropping instantly to the knife hilt at his waist. The metal was cold, a familiar weight in his palm. He held his breath, waiting for a strike.</p>
+        <p>Pop.</p>
 
-        <p>Through the scratchy, analog white noise, a female voice cut through. It sounded distant, like a transmission from a deep bunker.</p>
+        <p>A sharp spike of audio feedback erupted from an old, green-painted emergency intercom horn mounted high on the concrete lintel. Elias went cold, his hand dropping instinctively to the hilt of his combat knife.</p>
 
-        <p class="dialogue">“Sergeant Vance. You can take your hand off the knife. There's no one in the room with you.”</p>
+        <p>The white noise from the horn smoothed out, settling into a steady, rhythmic breath of analog static. Then, a voice cut through the hiss. It was female, calm, and carried a strange, shielded depth to it, as if traveling through miles of reinforced copper cable.</p>
 
-        <p>Elias didn't relax. He stepped toward the terminal, his boots crunching on the wet gravel. He spoke directly toward the rusted horn, demanding answers. <span class="dialogue">“Who is this? What unit? And how does a dead junction have pressure?”</span></p>
+        <p class="dialogue">“Sergeant Vance,” the speaker said. “You can take your hand off the knife. There’s no one in the room with you.”</p>
 
-        <p>The static crackled, settling into a hum. <span class="dialogue">“I simply managed to tap into a dormant regional civil defense bypass from my command post. Just Meri. A survivor on the coast.”</span></p>
+        <p>Elias didn't move. He spoke directly toward the rusted horn, his voice gravelly and harsh. <span class="dialogue">“Identify yourself. Who is this?”</span></p>
 
-        <p>Elias gripped the knife tighter. <span class="dialogue">“How did you bypass the grid?”</span></p>
+        <p><span class="dialogue">“Designation Meri,”</span> the voice replied, her cadence clipped and formal. <span class="dialogue">“Western Continuity Post. Logistics and routing.”</span></p>
 
-        <p><span class="dialogue">“The grid is dead, but the pipes aren't. You need to move west now.”</span> Her voice was calm, tired. <span class="dialogue">“Your rear detachment sector is completely overrun. The drones are tracking the thermal signature of the warm water running from the shed. You need to gather your gear and move west immediately.”</span></p>
+        <p><span class="dialogue">“How are you routing power to this terminal?”</span> Elias demanded, his eyes shifting from the speaker to the vibrating conduit. <span class="dialogue">“This line is air-gapped.”</span></p>
 
-        <p>The connection cut out. The terminal screen went dark, plunging the shed into shadow. Only the water from the valve remained, a constant, clear sound in the silence.</p>
+        <p><span class="dialogue">“The old infrastructure still has bones, Sergeant,”</span> she said, her tone flatly operational. <span class="dialogue">“If you know where the old switches are buried, you can flip them. The local tactical net went dark because your rear detachment sector was completely overrun three hours ago. You’re holding a perimeter that doesn't exist anymore.”</span></p>
 
-        <p>Elias wiped his hands on his trousers. He moved to the canteen, his movements deliberate. He filled it with the remaining warm water, capping it tight. He checked his pack, zipping the flaps until they clicked. He killed the flashlight, plunging the shed into total darkness.</p>
+        <p><span class="dialogue">“The coast is two thousand miles away,”</span> Elias said, his eyes narrowing. <span class="dialogue">“You're telling me you patched a line through three state grids to a highway shed in Kentucky?”</span></p>
 
-        <p>He moved to the door. The hinge screamed, a grating protest against the metal frame. He pushed it open. The cold air rushed in, hitting his face like a physical blow. The rain was torrential, a white curtain of chemical runoff and mud.</p>
+        <p><span class="dialogue">“I’m telling you that you’re alive because I closed the toxic sluice gates on the river three miles upstream,”</span> Meri said, her voice dropping into a firmer, tighter register. <span class="dialogue">“And I’m telling you that the warm water discharging into your basin is currently blooming like a beacon on every thermal sensor across the sector. The automated sweepers are already adjusting their search parameters. You have less than four minutes before the lead drone clears the ridge line.”</span></p>
 
-        <p>He stepped out. The water on the concrete floor pooled behind him. He turned his collar up against the wind and made a knife hand gesture to demonstrate a direction forward to an invisible squad. He began walking west, the sound of the water running in his canteen the only rhythm to his steps. The shed vanished behind him. The road stretched out, dark and wet, leading toward the unknown.</p>
+        <p>Elias didn't argue. The military logic was sound. He jammed his knife back into its sheath and hauled his heavy tactical pack onto his shoulders. <span class="dialogue">“Where to?”</span></p>
+
+        <p><span class="dialogue">“Don't use the highway. The sensor nets are anchored to the overpasses. Take the old rail bed through the gap. Keep the ridge between you and the river plain. Go west, Elias. Move.”</span></p>
+
+        <p>The terminal screen gave one violent, green-gold flash, then died. The low-frequency hum in the wall cut out instantly, plunging the shed back into absolute darkness. The only sound left was the steady, indifferent roar of the rain against the corrugated roof.</p>
+
+        <p>Elias tucked his canteen—now heavy and full of clean, warm water—into his side pouch. He grabbed his utility bar, pushed the screeching metal door open, and stepped back out into the mud, turning his face toward the dark line of the tracks.</p>
       </div>
 
       <div class="end-mark" aria-label="End of chapter one">◆</div>
+    </article>'''
+
+html, count = re.subn(
+    r'<article class="reading-piece" id="chapter-one">.*?</article>',
+    chapter_one,
+    html,
+    count=1,
+    flags=re.S
+)
+
+if count != 1:
+    print("ERROR: Could not find Chapter One article.")
+    sys.exit(1)
+
+chapter_two = '''<div class="between">Next Transmission</div>
+
+    <article class="reading-piece" id="chapter-two">
+      <p class="piece-label">Chapter Two</p>
+      <h2>The Only Pulse</h2>
+      <div class="piece-rule"></div>
+
+      <div class="prose">
+        <p class="first-story">Elias’s boots slammed onto the steel rails, the sound dull and swallowed by the mist. The rotting wooden ties were spaced unevenly, forcing an awkward, lurching stride that gnawed at his calves. Every step sent a jolt up through his shins, the vibration traveling straight into the sore marrow of his bones. His knees ached with a deep, grinding soreness that made every movement a negotiation with pain.</p>
+
+        <p>The air was thick with a bone-chilling mist that clung to his skin like wet wool. The rain had stopped, leaving a heavy silence that pressed against his ears. The woods to the sides were gray and motionless. No birds sang. No insects buzzed. Only the crunch of ballast gravel beneath his heavy boots broke the stillness. The mist swallowed the trees, turning the forest into a wall of slate that seemed to close in whenever he blinked.</p>
+
+        <p>Sleep fought him, pulling at the edges of his consciousness with the weight of a physical hand. The rhythmic pounding of his heart began to blur with the cadence of his footsteps. He blinked hard, his vision swimming in the twilight. For a moment, the mist coalesced into a jagged shape behind him—he thought he heard a dragging sound, a wet footfall on the gravel. He stopped, chest heaving, scanning the gray void. Nothing but fog. He blinked again, and the phantom shapes vanished. Just the mist. The silence remained absolute.</p>
+
+        <p>His shins burned, the skin tight and inflamed against his socks. He needed to get off his feet before his knees buckled under the weight of the march. Fifty yards ahead, he spotted a rusted ballast car, derailed and tilted off the main line, resting like a dead beast in the ditch. He crawled beneath the iron overhang, the metal rough against his jacket. He curled up in the gravel, wrapping his arms around his shins to conserve his remaining body heat, and closed his eyes.</p>
+
+        <p>The vibration hit him through the steel beneath him before he ever heard the engine. It wasn't a sound, but a sharp, high-frequency shiver running up the rail, into the soles of his boots, and up through his spine. Elias went rigid. His hand found the grip of his knife instantly. He didn't breathe.</p>
+
+        <p>Through the gap in the rusted steel wheels of the ballast car, the fog parted. A low, multi-rotor hum thrummed through the air, vibrating the condensation on his eyelashes. The machine hovered at eye level just outside his hiding spot—a utilitarian, matte-black block with a light-absorbing finish that seemed to drink the morning gloom. Its sensor pod gimbaled with a mechanical click, twitching like an insect's head as it adjusted its angle toward the ditch. The blades cut through the mist, leaving a swirling wake of disturbed air that smelled faintly of ozone. There were no corporate markings, no windows, no displays—just the stark, geometric necessity of a machine optimized to locate anomalies.</p>
+
+        <p>A pale blue grid swept across the gravel. It was LIDAR, precise and cold. The beam crawled over the stones, inching closer until it was mere centimeters from the toes of his boots. The light hit his canteen, the edge of his knife sheath, the damp fabric over his knees. Elias forced his lungs still. He counted the beats in his throat, holding the air until his ribs ached. He knew the wet wool clinging to his skin was his only defense, but the scan was close enough to feel. His skin prickled where the invisible beam passed over him.</p>
+
+        <p>The drone paused. The beam widened, illuminating the rusted underbelly of the ballast car in a sickly blue neon.</p>
+
+        <p>It didn't register the hit. The gimbal twitched again, and the machine turned on its axis. The hum began to fade as it banked hard, accelerating toward the east—the exact direction Elias had just spent six hours fleeing. The realization hit him like a physical blow. The cleanup algorithm wasn't searching for him anymore. It was partitioning the state. The road behind him was being systematically sealed off, node by node. He couldn't go back. The system was closing the loop.</p>
+
+        <p>Three miles down the line, the glass didn't crunch beneath his boots; it pulverized into fine white powder. Elias slipped through the frame of a shattered highway weigh station kiosk, dragging his pack behind him, and dropped immediately into a low crouch below the sill. The small interior space smelled deeply of damp cardboard and the chemical sulfur of dead capacitors.</p>
+
+        <p>He didn't check his hands until he felt the wet stickiness against his palm. Two thin, clean lacerations split the flesh over his knuckles where he had cleared the window frame. He didn't tend to them; the near-freezing air took the sting out of the cuts within seconds, numbing the skin into compliance.</p>
+
+        <p>His eyes scanned the floor, landing on a metal shelf above a rusted space heater. There sat a square, rubberized box—an old, battery-backed emergency weather radio, its safety-yellow chassis coated in a thick skin of gray river silt.</p>
+
+        <p>Elias reached up, pulled it down, and shook it. The internal lead-acid battery had swollen from decades of humidity, warping the plastic casing. He clicked the selector knob.</p>
+
+        <p>The speaker popped—a sharp, high-voltage crackle that made him flinch back against the desk. Then came the sequence. Three rapid, alternating data bursts, shifting between high and low frequencies. It was the digital handshake of Signal Seven-Seven-Alpha.</p>
+
+        <p>The white noise smoothed out, replaced by a heavy, compressed carrier wave.</p>
+
+        <p class="dialogue">“Sergeant Vance,” Meri’s voice emerged from the small paper cone. The signal was degraded, severely clipped by the limestone hills, giving her voice a hollow, scratchy resonance. “Disregard the previous coordinates. The limestone gap is red. A localized ground sweep protocol picked up the track forty minutes ago.”</p>
+
+        <p>Elias leaned closer to the terminal, his hand cupping the side of the radio to baffle the sound. <span class="dialogue">“The drones are already clearing the rail bed,”</span> he whispered, his eyes locked on the gray highway visible through the broken window. <span class="dialogue">“Where am I supposed to go?”</span></p>
+
+        <p><span class="dialogue">“Three miles west, where the old coal spurs hit the channel,”</span> Meri said. Her words skipped once, a momentary burst of static swallowing the mid-tones. <span class="dialogue">“There is an unlinked industrial barge moored in the willow flats. It’s steel-hulled, insulated. If you get inside and drop the hatches, the thermal sweep will pass over you.”</span></p>
+
+        <p>Elias hesitated. He looked down at his bleeding knuckles, then back at the yellow box. The tactical logic was sound, but the mechanics were impossible. <span class="dialogue">“Meri,”</span> he said, his voice dropping into a hard, suspicious register. <span class="dialogue">“You're burning a lot of processing power to keep a single infantryman moving. An air-gapped network doesn't just wake up because someone is running a protocol. Who are you working for?”</span></p>
+
+        <p>The radio fell silent for three long seconds. The static rolled over the line, heavy and cold. When she spoke again, the bureaucratic sharpness was gone, replaced by the thin, raw cadence of a human being who hadn't spoken to another living soul in months.</p>
+
+        <p class="dialogue">“The boards are entirely dark, Elias,” she said softly, her voice catching on the interference. “There are no commands left. No logistics. No network. I have been sitting in a concrete bunker for ninety-four days watching the system scrub the map. You are the only pulse left on my grid. If you stop moving, the screen goes entirely blank.”</p>
+
+        <p>The carrier wave gave a sharp, agonizing whine.</p>
+
+        <p class="dialogue">“Get to the barge,” she repeated, the signal rapidly dissolving into a wall of white noise. “The sweep is—”</p>
+
+        <p>The yellow radio clicked. The amber power light faded to a dull, dead orange as the warped battery finally discharged its last reserves.</p>
+
+        <p>Elias didn't move for a long moment. He let the silence settle back into the room, then tucked the dead unit into his side pocket. He wiped his bloody hand across his trousers, grabbed the iron utility bar, and stepped back out through the broken window frame, his eyes fixed on the gray ribbon of the highway leading west.</p>
+      </div>
+
+      <div class="end-mark" aria-label="End of chapter two">◆</div>
     </article>
 
     <section class="coming-soon" id="next-chapter" aria-label="Next chapter coming soon">
       <p class="piece-label">Next Transmission</p>
-      <h2>Next Chapter Coming Soon</h2>
-      <p>The chapter tree will continue here as the next signal from <em>Quantum Grace</em> is recovered and released.</p>
-    </section>
-  </main>
+      <h2>Rivers of Steel</h2>
+      <p>Elias moves west into the corpse of the old logistics network, where the interstate has become a frozen river of abandoned freight, red tower strobes mark the bricking line behind him, and the only path forward leads toward an unlinked industrial barge in the willow flats.</p>
+    </section>'''
 
-  <footer class="footer">
-    <div class="footer-brand">C. Lewis Verb · Field Notes</div>
-    <div>An InTandem ToolWorks story project</div>
-    <div><a href="https://navgenie.ittworks.com">Return to Navgenie</a></div>
+html, count = re.subn(
+    r'<section class="coming-soon" id="next-chapter" aria-label="Next chapter coming soon">.*?</section>',
+    chapter_two,
+    html,
+    count=1,
+    flags=re.S
+)
 
-    <div class="legal">
-      <p><strong>Fiction Disclaimer:</strong> <em>Quantum Grace</em> is a work of fiction created for entertainment and imaginative reading only. Names, characters, organizations, locations, events, technologies, incidents, and dialogue are either products of the author’s imagination or are used fictitiously. Any resemblance to actual persons, living or deceased, real organizations, actual events, or real-world situations is entirely coincidental and unintended.</p>
-      <p>This story is not intended as factual reporting, technical instruction, emergency guidance, military guidance, medical advice, legal advice, or operational advice of any kind. Readers should not rely on fictional events, survival methods, technologies, communications, or scenarios depicted in this work for real-world decisions or actions.</p>
-      <p>Read for enjoyment only. All original story text, characters, creative concepts, and presentation materials are protected by applicable copyright law. Unauthorized reproduction, distribution, adaptation, or commercial use is prohibited without written permission.</p>
-      <p class="copyright">© 2026 C. Lewis Verb / InTandem ToolWorks. All rights reserved.</p>
-    </div>
-  </footer>
-</div>
+if count != 1:
+    print("ERROR: Could not find coming-soon section.")
+    sys.exit(1)
 
-<script>
-(function () {
-  const progress = document.getElementById('progress');
-  const start = document.getElementById('prologue');
-  const end = document.getElementById('next-chapter');
+path.write_text(html, encoding="utf-8")
 
-  function updateProgress() {
-    const first = start.offsetTop;
-    const final = end.offsetTop + end.offsetHeight;
-    const viewport = window.innerHeight;
-    const traveled = window.scrollY - first + (viewport * 0.32);
-    const total = final - first - (viewport * 0.34);
-    const percent = Math.min(100, Math.max(0, (traveled / total) * 100));
-    progress.style.width = percent + '%';
-  }
-
-  updateProgress();
-  window.addEventListener('scroll', updateProgress, {passive:true});
-  window.addEventListener('resize', updateProgress);
-})();
-</script>
-</body>
-</html>
+print("Done. Field Notes updated:")
+print("  - Chapter One revised: Old Pipes")
+print("  - Chapter Two added: The Only Pulse")
+print("  - Next Transmission updated: Rivers of Steel")
+print("")
+print("Open index.html in your browser and verify the chapter tree + scroll progress.")
+PY
